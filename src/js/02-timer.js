@@ -37,17 +37,18 @@ function updateTimer(ms) {
 
 btnStartTimer.addEventListener('click', () => {
   btnStartTimer.disabled = true;
-  const selectedDate = dateTimePicker.valueAsDate;
-  const intermediateTime = selectedDate.getTime() - new Date().getTime();
+  const selectedDate = dateTimePicker.value;
+  const intermediateTime = new Date(selectedDate).getTime() - Date.now();
+//   console.log(selectedDate);
 
   updateTimer(intermediateTime)
 
   const intervalId = setInterval(() => {
-    const currentTime = new Date().getTime();
-    const intermediateTime = selectedDate.getTime() - currentTime;
+    const currentTime = Date.now();
+    const intermediateTime = new Date(selectedDate).getTime() - currentTime;
     updateTimer(intermediateTime)
 
-    if(intermediateTime <= 0){
+    if(intermediateTime <= 1000){
       clearInterval(intervalId)
     }
   }, 1000);
