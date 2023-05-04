@@ -22,6 +22,14 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
+// function activeBtn() {
+//   if (selectedDate && selectedDate.getTime() > Date.now()) { 
+//     btnStartTimer.disabled = false;
+//   } else {
+//     btnStartTimer.disabled = true;
+//   }
+// }
+
 function updateTimer(ms) {
   const time = convertMs(ms);
   daysElem.textContent = time.days.toString().padStart(2, '0');
