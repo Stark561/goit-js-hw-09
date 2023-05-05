@@ -7,6 +7,7 @@ const daysElem = document.querySelector('[data-days]');
 const hoursElem = document.querySelector('[data-hours]');
 const minutesElem = document.querySelector('[data-minutes]');
 const secondsElem = document.querySelector('[data-seconds]');
+btnStartTimer.disabled = true; 
 
 function convertMs(ms) {
   const second = 1000;
@@ -21,14 +22,6 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
-// function activeBtn() {
-//   if (selectedDate && selectedDate.getTime() > Date.now()) { 
-//     btnStartTimer.disabled = false;
-//   } else {
-//     btnStartTimer.disabled = true;
-//   }
-// }
 
 function updateTimer(ms) {
   const time = convertMs(ms);
@@ -67,9 +60,14 @@ flatpickr(dateTimePicker, {
   onClose(selectedDates) {
     const selectedDate = selectedDates[0];
     const now = new Date();
+    console.log(selectedDate);
+    console.log(now);
+    console.log(selectedDate < now);
     if (selectedDate < now) {
-      dateTimePicker._input.value = '';
+      btnStartTimer.disabled = true;
       alert('Ошибка!!! Нельзя выбрать прошлое время');
+    } else {
+      btnStartTimer.disabled = false;
     }
   },
 });
