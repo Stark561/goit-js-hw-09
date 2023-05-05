@@ -37,6 +37,7 @@ function updateTimer(ms) {
 
 btnStartTimer.addEventListener('click', () => {
   btnStartTimer.disabled = true;
+  dateTimePicker.disabled = true;
   const selectedDate = dateTimePicker.value;
   const intermediateTime = new Date(selectedDate).getTime() - Date.now();
   updateTimer(intermediateTime)
@@ -46,10 +47,12 @@ btnStartTimer.addEventListener('click', () => {
     updateTimer(intermediateTime)
 
     if(intermediateTime <= 1000){
+      dateTimePicker.disabled = false;
       clearInterval(intervalId)
     }
   }, 1000);
 });
+
 
 flatpickr(dateTimePicker, {
   enableTime: true,
@@ -57,6 +60,7 @@ flatpickr(dateTimePicker, {
   defaultDate: new Date(),
   minuteIncrement: 1,
   minDate: "today",
+  // mode: "single", 
   onClose(selectedDates) {
     const selectedDate = selectedDates[0];
     const now = new Date();
